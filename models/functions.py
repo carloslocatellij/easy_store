@@ -14,7 +14,7 @@ def write_logs(request):
 	message = "-" * 80
 	message += "\nIPN Received\n"
 	message += "ARGS: \n" + str(request.args) + "\n"
-	message += "VARS: \N" + str(request.vars) + "\n"
+	message += "VARS: \n" + str(request.vars) + "\n"
 	log_in_file(message)
 
 def generate_tokens(token_class, ammount):
