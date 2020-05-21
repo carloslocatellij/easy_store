@@ -66,7 +66,7 @@ def ipn():
 
     pending = db.pending_transaction(id=request.vars.invoice, confirmed=False)
     if not pending:
-        return 'NOT FOUND'
+        return T('NOT FOUND')
 
     already_confirmed = db.confirmed_transaction(pending_id=pending.id)
     if already_confirmed:
@@ -83,7 +83,7 @@ def ipn():
                                                     tokens=generate_tokens(pending.token_class, peding.ammount)
                                                     )
         pending.update_record(confirmed=True)
-        mail.send(to=pending.user_id.email, subject="Your payment is now confirmed", message="Thanks, your payment is confirmed.")
+        mail.send(to=pending.user_id.email, subject=T("Your payment is now confirmed"), message=T("Thanks, your payment is confirmed."))
 
     else:
 

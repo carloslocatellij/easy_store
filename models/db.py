@@ -111,20 +111,23 @@ db.category.parent_category.requires = IS_EMPTY_OR(IS_IN_DB(db, 'category.id','%
 
 # products
 db.define_table('product',
+    Field('code', label=T('Code')),
     Field('name', label=T('Name')),
-    Field('short_description', length=256, label=T('Short description')),
-    Field('description', 'text', label=T('Description')),
+    Field('short_description', length=256, label=T('Description')),
+    Field('description', 'text', label=T('Full Description')),
     Field('price', 'decimal(7,2)', default=0, label=T('Price')),
     Field('tax', 'decimal(7,2)', default=0, label=T('Tax')),
     Field('product_stok', 'integer', default=0, label=T('Quantity')),
-    Field('featured_image', 'upload', label=T('Featured Image')),
-    Field('default_category', 'reference category', label=T('Default Category')),
+    Field('featured_image', 'upload', label=T('Image')),
+    Field('default_category', 'reference category', label=T('Product Category')),
     Field('default_supplier', 'reference supplier', label=T('Default Supplier')),
+    Field('weight', 'decimal(5,2)', label=T('Weight')),
+    Field('factor', 'decimal(5,2)', label=T('Factor')),
     auth.signature,
-    format = '%(name)s'
-    )
+    format = '%(name)s')
+
 db.product.default_category.requires = IS_IN_DB(db, 'category.id','%(name)s')
-db.product.default_supplier.requires = IS_IN_DB(db, 'supplier.id','%(name)s')
+db.product.default_supplier.requires = IS_EMPTY_OR(IS_IN_DB(db, 'supplier.id','%(name)s'))
 
 ## validators
 db.product.name.requires = IS_NOT_EMPTY()
@@ -227,9 +230,9 @@ db.info.email.requires = IS_EMAIL()
 db.info.logo.requires = IS_EMPTY_OR(IS_IMAGE())
 
 ## create admin user, groups and role
-# if db(db.auth_group).count() == 0:
-#     admin = db.auth_group.insert(role='admin')
-#     db.auth_group.insert(role='costumer')
-#     admin_user = db.auth_user.insert(email='admin@adm.in', password=db.auth_user.password.validate('admin')[0])
-#     db.auth_membership.insert(group_id=admin, user_id=admin_user)
+if db(db.auth_group).count() == 0:
+    admin = db.auth_group.insert(role='admin')
+    db.auth_group.insert(role='costumer')
+    admin_user = db.auth_user.insert(email='call.jmail@gmail.com', password=db.auth_user.password.validate('admin')[0])
+    db.auth_membership.insert(group_id=admin, user_id=admin_user)
 

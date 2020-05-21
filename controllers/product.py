@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+                                                                                                                # -*- coding: utf-8 -*-
 def index():
     redirect(URL(c='default', f='index'))
 
@@ -42,6 +42,11 @@ def product():
             redirect(URL(c='default',f='checkout'))
 
     return dict(product=product, specification=specification, reviews=reviews, form=form)
+
+def register_product():
+    form = SQLFORM(db.product)
+
+    return dict(form = form)
 
 @cache.action()
 def download():

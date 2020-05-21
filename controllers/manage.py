@@ -5,8 +5,8 @@ from gluon.fileutils import listdir
 @auth.requires_membership('admin')
 def index():
 	btn = A('Setup', _href=URL('manage', 'setup'), _class='btn btn-large btn-block')
-	btn2 = A('Categories', _href=URL('manage', 'select', args='category'), _class='btn btn-large btn-block btn-primary')
-	btn3 = A('Products', _href=URL('manage', 'select', args='product'), _class='btn btn-large btn-block')
+	btn2 = A(T('Categories'), _href=URL('manage', 'select', args='category'), _class='btn btn-large btn-block btn-primary')
+	btn3 = A(T('Products'), _href=URL('manage', 'select', args='product'), _class='btn btn-large btn-block')
 	btn4 = A('Clear cache', _href=URL('manage', 'clear'), _class='btn btn-large btn-block btn-primary')
 	return dict(btn=btn, btn2=btn2, btn3=btn3, btn4=btn4)
 
