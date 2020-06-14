@@ -168,6 +168,8 @@ db.define_table('specification',
     Field('ethernet', label=T('Ethernet')),
     Field('battery', label=T('Battery')),
     Field('other', 'text', label=T('Other')),
+    Field('color', label=T('Color')),
+    Field('numeration', label=T('Numeration'))
     format = '%(product.name)s'
     )
 ## validators
